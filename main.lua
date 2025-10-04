@@ -15,7 +15,11 @@ function love.update(dt)
 end
 
 function love.mousepressed(x, y, button)
-    
+    COIN:mousepressed(x, y, button)
+end
+
+function love.mousereleased()
+    COIN:mousereleased()
 end
 
 function love.draw()
