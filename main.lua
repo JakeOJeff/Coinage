@@ -14,6 +14,10 @@ function love.update(dt)
     COIN:update(dt)
 end
 
+function love.mousepressed(x, y, button)
+    
+end
+
 function love.draw()
     COIN:draw()
     popups:draw()
