@@ -22,7 +22,9 @@ function coin:update(dt)
     self.x, self.y = self.body:getPosition()
     self.xVel, self.yVel = self.body:getLinearVelocity()
     if self.dragging then
-        
+        local mx, my = love.mouse.getPosition()
+
+        self.body:setPosition(mx - self.mox, my - self.moy)
     end
     print(self.dragging)
 end
