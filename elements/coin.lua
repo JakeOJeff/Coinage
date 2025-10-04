@@ -20,7 +20,7 @@ function coin:update(dt)
 
 end
 
-function game:draw()
+function coin:draw()
 
     
 
