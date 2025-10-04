@@ -1,8 +1,12 @@
 local coin = {}
+coin.__index = coin
 
-function coin:load(world)
-    self.x = 200
-    self.y = 200
+function coin:new(world, x, y)
+        local self = setmetatable({}, coin)
+
+
+    self.x = x
+    self.y = y
     self.xVel = 0
     self.yVel = 0
     self.mox = 0
@@ -10,12 +14,14 @@ function coin:load(world)
     self.img = love.graphics.newImage("assets/coin.png")
 
     self.body = love.physics.newBody(world, self.x, self.y, "dynamic")
-    self.shape = love.physics.newCircleShape(self.img:getWidth() / 5)
-    self.fixture = love.physics.newFixture(self.body, self.shape)
+    self.shape = love.physics.newCircleShape(self.img:getWidth() / 8)
+    self.fixture = love.physics.newFixture(self.body, self.shape, 1)
 
     self.fixture:setRestitution(0.5)
 
     self.dragging = false
+        return self
+
 end
 
 function coin:update(dt)
@@ -24,7 +30,8 @@ function coin:update(dt)
     if self.dragging then
         local mx, my = love.mouse.getPosition()
 
-        self.body:setPosition(mx - self.mox, my - self.moy)
+        self.joint = love.physics.newMouseJoint(self.body, mx, my)
+
     end
     print(self.dragging)
 end
