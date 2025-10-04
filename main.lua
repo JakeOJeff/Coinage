@@ -6,6 +6,7 @@ Coins = {}
 function love.load()
     world = love.physics.newWorld(0, 0, true)
     popups:load()
+    
     table.insert(Coins, COIN:new(world, 200, 200))
     table.insert(Coins, COIN:new(world, 400, 200))
 end
