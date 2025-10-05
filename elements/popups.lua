@@ -4,10 +4,20 @@ local popups = {}
 
 function popups:load()
     headerFont = love.graphics.newFont(50)
+    itemFont = love.graphics.newFont(25)
     wW = love.graphics.getWidth()
     wH = love.graphics.getHeight()
-    self.enabled = true
-    self.slabs = { {}, {} }
+    self.enabled = false
+    self.slabs = { }
+    --[[
+    {
+        name = "Coins",
+        quantity = 3,
+        img = love.graphics.newImage("assets/coin.png"),
+        func = function()
+            table.insert(Coins, COIN:new(200, 200))
+        end
+    } ]]
 end
 
 function popups:update(dt)
@@ -30,8 +40,25 @@ function popups:draw()
 
         for i = 1, #self.slabs do
             local x = startX + (i - 1) * (w + spacing)
-            love.graphics.rectangle("line", x, wH/2 - w/2, w, w, 25, 25)
+            love.graphics.rectangle("line", x, wH / 2 - w / 2, w, w, 25, 25)
+            local img = self.slabs[i].img
+            local imgW, imgH = img:getWidth(), img:getHeight()
+            local scale = (w * 0.7) / imgW 
+
+            local y = 220
+
+            love.graphics.draw(
+                img,
+                x + w / 2, 
+                y + w / 2, 
+                0, 
+                scale, scale, 
+                imgW / 2, imgH / 2 
+            )
+                    love.graphics.setFont(itemFont)
+        love.graphics.print(self.slabs[i].name.." x"..self.slabs[i].quantity, x + w / 2 - itemFont:getWidth(self.slabs[i].name.." x"..self.slabs[i].quantity)/2, y + w/2 + 100)
         end
+
     end
     love.graphics.setColor(1, 1, 1)
 end
