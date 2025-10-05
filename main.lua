@@ -1,6 +1,7 @@
 local popups = require "elements.popups"
 COIN = require "elements.coin"
 Coins = {}
+ScreenWalls = {}
 
 
 function love.load()
