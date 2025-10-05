@@ -68,6 +68,8 @@ function love.mousepressed(x, y, button)
     end
     if inRollPos(x, y) and inputCoins > 0 then
         inputCoins = inputCoins - 1
+        popups.enabled = true
+        -- popups:addItems()
         currentRollImg = Roll
         print(currentRollImg)
     end

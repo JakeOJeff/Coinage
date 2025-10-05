@@ -8,6 +8,7 @@ function popups:load()
     wW = love.graphics.getWidth()
     wH = love.graphics.getHeight()
     self.enabled = false
+    self.timer = 0
     self.itemList = {
         {
             name = "Coins",
@@ -42,14 +43,46 @@ function popups:load()
 end
 
 function popups:update(dt)
+    if self.enabled then
+        self.timer = self.timer + dt
+    end
 
+    local flooredTimer = math.floor(self.timer)
+    if (flooredTimer == 1 or flooredTimer == 2 or flooredTimer == 3)
+        and self.lastTrigger ~= flooredTimer then
+
+        self.lastTrigger = flooredTimer
+        self:addItems()
+    end
 end
 
 function popups:addItems()
     local chosenItem = pickRandomItem(self.itemList)
-    chosenItem.quantity = love.math.random(1, 3)
-    table.insert(self.slabs, chosenItem)
+    local addQty = love.math.random(1, 3)
+
+    -- Check if the item already exists in slabs
+    local found = false
+    for _, slab in ipairs(self.slabs) do
+        if slab.name == chosenItem.name then
+            slab.quantity = slab.quantity + addQty
+            found = true
+            break
+        end
+    end
+
+    -- If not found, add a new entry
+    if not found then
+        local newItem = {
+            name = chosenItem.name,
+            quantity = addQty,
+            img = chosenItem.img,
+            func = chosenItem.func,
+            rarity = chosenItem.rarity
+        }
+        table.insert(self.slabs, newItem)
+    end
 end
+
 function pickRandomItem(itemList)
     local totalWeight = 0
     for _, item in ipairs(itemList) do
