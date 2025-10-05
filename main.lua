@@ -45,10 +45,13 @@ function love.draw()
     for _, v in pairs(Objects) do
         v:draw()
     end
-    love.graphics.draw(tipBacker)
+
+    local scaledDownProp = 1/2.5
+    love.graphics.draw(tipBacker, 10, love.graphics.getHeight() - (tipBacker:getHeight() * scaledDownProp), 0, scaledDownProp, scaledDownProp )
     for _, coin in ipairs(Coins) do
         coin:draw()
     end
-    love.graphics.draw(tipFronter)
+    love.graphics.draw(tipFronter, 10, love.graphics.getHeight() - (tipBacker:getHeight() * scaledDownProp), 0, scaledDownProp, scaledDownProp)
+
     popups:draw()
 end
