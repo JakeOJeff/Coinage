@@ -15,7 +15,7 @@ function popups:load()
             quantity = 1,
             img = love.graphics.newImage("assets/coin.png"),
             func = function()
-                table.insert(Coins, COIN:new(200, 200))
+                table.insert(Coins, COIN:new(world, 200, 200))
             end,
             rarity = 1 / 2
         },
@@ -53,6 +53,21 @@ function popups:update(dt)
 
         self.lastTrigger = flooredTimer
         self:addItems()
+    end
+
+    if flooredTimer == 6  and self.enabled then
+        self.enabled = false
+
+        for _, v in ipairs(self.slabs) do
+            for i = 1, v.quantity do
+                v.func()
+            end
+        end
+        
+
+        self.timer = 0
+        self.slabs = {}
+        self.lastTrigger = nil
     end
 end
 
