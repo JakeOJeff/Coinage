@@ -11,7 +11,10 @@ ScreenWalls = require "elements.walls"
 function love.load()
     popups:load()
     ScreenWalls:load()
-    -- Im
+    -- Images 
+    tipBacker = love.graphics.newImage("assets/tip-backer.png")
+    tipFronter = love.graphics.newImage("assets/tip-fronter.png")
+
     objectsLoad()
     table.insert(Coins, COIN:new(world, 200, 200))
     table.insert(Coins, COIN:new(world, 400, 200))
@@ -42,8 +45,10 @@ function love.draw()
     for _, v in pairs(Objects) do
         v:draw()
     end
+    love.graphics.draw(tipBacker)
     for _, coin in ipairs(Coins) do
         coin:draw()
     end
+    love.graphics.draw(tipFronter)
     popups:draw()
 end
