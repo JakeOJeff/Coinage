@@ -1,13 +1,14 @@
 local popups = require "elements.popups"
 COIN = require "elements.coin"
 Coins = {}
-ScreenWalls = {}
+    world = love.physics.newWorld(0, 0, true)
+
+ScreenWalls = require "elements.walls"
 
 
 function love.load()
-    world = love.physics.newWorld(0, 0, true)
     popups:load()
-    
+    ScreenWalls:load()
     table.insert(Coins, COIN:new(world, 200, 200))
     table.insert(Coins, COIN:new(world, 400, 200))
 end
