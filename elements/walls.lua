@@ -23,4 +23,5 @@ function walls:load()
     walls[#walls].fixture = love.physics.newFixture(walls[#walls].body, walls[#walls].shape)
 end
 
+
 return walls

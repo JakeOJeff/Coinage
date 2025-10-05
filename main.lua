@@ -3,7 +3,7 @@ COIN = require "elements.coin"
 OBJECT = require "elements.object"
 Coins = {}
 Objects = {}
-    world = love.physics.newWorld(0, 9.81 * 64, false)
+world = love.physics.newWorld(0, 9.81 * 64, false)
 
 ScreenWalls = require "elements.walls"
 
@@ -11,7 +11,7 @@ ScreenWalls = require "elements.walls"
 function love.load()
     popups:load()
     ScreenWalls:load()
-    rect = OBJECT:newRect(world, 300, 300, 500, 10, "static", 0.5)
+    objectsLoad()
     table.insert(Coins, COIN:new(world, 200, 200))
     table.insert(Coins, COIN:new(world, 400, 200))
 end
@@ -37,11 +37,10 @@ function love.mousereleased()
 end
 
 function love.draw()
-    love.graphics.setBackgroundColor(89/255, 209/255, 249/255)
+    love.graphics.setBackgroundColor(89 / 255, 209 / 255, 249 / 255)
     for _, v in pairs(Objects) do
         v:draw()
     end
-    rect:draw()
     for _, coin in ipairs(Coins) do
         coin:draw()
     end

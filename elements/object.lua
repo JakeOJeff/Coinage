@@ -28,6 +28,14 @@ function object:draw()
 end
 
 
+function objectsLoad()
+    local midCenter = love.graphics.getWidth()/2
+
+    table.insert(Objects, OBJECT:newRect(world, midCenter, 300, 500, 10, "static", 0.5))
+    table.insert(Objects, OBJECT:newRect(world, midCenter, 300, 500, 10, "static", 0.5))
+    table.insert(Objects, OBJECT:newRect(world, midCenter, 300, 500, 10, "static", 0.5))
+
+end
 
 
 return object
