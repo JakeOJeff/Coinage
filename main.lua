@@ -11,6 +11,7 @@ ScreenWalls = require "elements.walls"
 function love.load()
     popups:load()
     ScreenWalls:load()
+    -- Im
     objectsLoad()
     table.insert(Coins, COIN:new(world, 200, 200))
     table.insert(Coins, COIN:new(world, 400, 200))

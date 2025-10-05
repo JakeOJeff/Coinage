@@ -23,19 +23,21 @@ function object:draw()
     love.graphics.push()
     love.graphics.translate(self.body:getX(), self.body:getY())
     love.graphics.rotate(self.body:getAngle())
-    love.graphics.rectangle("line", -self.width/2, -self.height/2, self.width, self.height)
+    love.graphics.rectangle("line", -self.width / 2, -self.height / 2, self.width, self.height)
     love.graphics.pop()
 end
 
-
 function objectsLoad()
-    local midCenter = love.graphics.getWidth()/2
+    local midCenter = love.graphics.getWidth() / 2
+    local midWidth = love.graphics.getWidth() / 5
 
-    table.insert(Objects, OBJECT:newRect(world, midCenter, 300, 500, 10, "static", 0.5))
-    table.insert(Objects, OBJECT:newRect(world, midCenter, 300, 500, 10, "static", 0.5))
-    table.insert(Objects, OBJECT:newRect(world, midCenter, 300, 500, 10, "static", 0.5))
+    table.insert(Objects, OBJECT:newRect(world, midCenter - 125, 200, midWidth, 10, "static", 0.3))
 
+    table.insert(Objects, OBJECT:newRect(world, midCenter + midWidth / 2 + 130, 0.8 * 400, 10, 10, "static", -0.5))
+    table.insert(Objects, OBJECT:newRect(world, midCenter + 125, 400, midWidth, 10, "static", -0.3))
+
+    table.insert(Objects, OBJECT:newRect(world, midCenter - midWidth / 2 - 130, 0.8 * 600, 10, 10, "static", 0.5))
+    table.insert(Objects, OBJECT:newRect(world, midCenter - 125, 600, midWidth, 10, "static", 0.3))
 end
-
 
 return object
