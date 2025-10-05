@@ -2,7 +2,7 @@ local popups = require "elements.popups"
 COIN = require "elements.coin"
 
 font = love.graphics.newFont(45)
-inputCoins = 20
+inputCoins = 0
 
 OBJECT = require "elements.object"
 Coins = {}

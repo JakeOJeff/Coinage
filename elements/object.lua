@@ -65,19 +65,19 @@ function objectsLoad()
 
     table.insert(Objects,
         OBJECT:newRect(world, 10, 30 + love.graphics.getHeight() - (tipBacker:getHeight() * 1 / 3), 2,
-            tipBacker:getHeight() * 1 / 3, "static", 0, true))
+            tipBacker:getHeight() * 1 / 3, "static", 0, false))
     table.insert(Objects,
         OBJECT:newRect(world, 10 + (tipBacker:getWidth() * 1 / 3),
             30 + love.graphics.getHeight() - (tipBacker:getHeight() * 1 / 3), 2, tipBacker:getHeight() * 1 / 3,
-            "static", 0, true))
+            "static", 0, false))
 
             local smallPropSize = 1/2.15
-    table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 175, love.graphics.getHeight() - 145, 100, 5, "static", 0, true ))
-        table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 175, love.graphics.getHeight() - 70, 100, 5, "static", 0, true ))
+    table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 175, love.graphics.getHeight() - 145, 100, 5, "static", 0, false ))
+        table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 175, love.graphics.getHeight() - 70, 100, 5, "static", 0, false ))
 
 
         -- slot
-        table.insert(Objects, OBJECT:newRect(world, 30, 30, 40, 50, "static", 0, true, "slot"))
+        table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 275, love.graphics.getHeight() - 145, 10, 80, "static", 0, false, "slot"))
 end
 
 return object
