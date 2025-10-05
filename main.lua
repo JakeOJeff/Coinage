@@ -55,7 +55,7 @@ function love.update(dt)
     end
 
     local mx, my = love.mouse.getPosition()
-    if inRollPos(mx, my) then
+    if inRollPos(mx, my) and not popups.enabled then
         love.mouse.setCursor(clickCursor)
     else
         love.mouse.setCursor(normalCursor)
@@ -66,7 +66,7 @@ function love.mousepressed(x, y, button)
     for _, coin in ipairs(Coins) do
         coin:mousepressed(x, y, button)
     end
-    if inRollPos(x, y) and inputCoins > 0 then
+    if inRollPos(x, y) and inputCoins > 0 and  not popups.enabled then
         inputCoins = inputCoins - 1
         popups.enabled = true
         -- popups:addItems()

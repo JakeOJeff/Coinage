@@ -15,7 +15,7 @@ function popups:load()
             quantity = 1,
             img = love.graphics.newImage("assets/coin.png"),
             func = function()
-                table.insert(Coins, COIN:new(world, 200, 200))
+                table.insert(Coins, COIN:new(world, love.math.random(10, 350), 200))
             end,
             rarity = 1 / 2
         },
@@ -27,6 +27,36 @@ function popups:load()
                 
             end,
             rarity = 1 / 4
+        },
+        {
+            name = "Red Gumball",
+            quantity = 1,
+            img = love.graphics.newImage("assets/gumball.png"),
+            func = function ()
+                
+            end,
+            color = {1,0,0},
+            rarity = 1/25
+        },
+        {
+            name = "Green Gumball",
+            quantity = 1,
+            img = love.graphics.newImage("assets/gumball.png"),
+            func = function ()
+                
+            end,
+            color = {0,1,0},
+            rarity = 1/12
+        },
+        {
+            name = "Blue Gumball",
+            quantity = 1,
+            img = love.graphics.newImage("assets/gumball.png"),
+            func = function ()
+                
+            end,
+            color = {0,0,1},
+            rarity = 1/8
         },
     }
     self.itemInventory = {}
