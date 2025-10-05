@@ -49,7 +49,10 @@ function objectsLoad()
             30 + love.graphics.getHeight() - (tipBacker:getHeight() * 1 / 3), 2, tipBacker:getHeight() * 1 / 3,
             "static", 0, true))
 
-    table.insert(Objects, OBJECT:newRect(world, ))
+            local smallPropSize = 1/2.15
+    table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 175, love.graphics.getHeight() - 145, 100, 5, "static", 0, true ))
+        table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 175, love.graphics.getHeight() - 70, 100, 5, "static", 0, true ))
+
 end
 
 return object
