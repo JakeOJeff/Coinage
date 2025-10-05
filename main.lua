@@ -17,7 +17,7 @@ ScreenWalls = require "elements.walls"
 function love.load()
     popups:load()
     ScreenWalls:load()
-    -- Images 
+    -- Images
     tipBacker = love.graphics.newImage("assets/tip-backer.png")
     tipFronter = love.graphics.newImage("assets/tip-fronter.png")
 
@@ -25,10 +25,17 @@ function love.load()
     roll = love.graphics.newImage("assets/roll.png")
     currentRollImg = preRoll
 
+    roller = {
+        x = love.graphics.getWidth() - 345,
+        y = love.graphics.getHeight() - 210,
+        width = 25,
+        height = 50
+    }
+
     objectsLoad()
     table.insert(Coins, COIN:new(world, 200, 200))
-
 end
+
 world:setCallbacks(beginContact)
 
 function love.update(dt)
@@ -37,11 +44,11 @@ function love.update(dt)
     for _, coin in ipairs(Coins) do
         coin:update(dt)
     end
-        for i = #Coins, 1, -1 do
+    for i = #Coins, 1, -1 do
         local c = Coins[i]
         if c.toRemove then
-            c.body:destroy()  -- destroy the physics body
-            table.remove(Coins, i)  -- remove from table
+            c.body:destroy()       -- destroy the physics body
+            table.remove(Coins, i) -- remove from table
         end
     end
 end
@@ -60,9 +67,8 @@ end
 
 function love.keypressed(key)
     if key == "e" then
-           local randLoveNum = love.math.random(20, 400)
-           table.insert(Coins, COIN:new(world, randLoveNum, 200))
- 
+        local randLoveNum = love.math.random(20, 400)
+        table.insert(Coins, COIN:new(world, randLoveNum, 200))
     end
 end
 
@@ -72,17 +78,29 @@ function love.draw()
         v:draw()
     end
 
-    local scaledDownProp = 1/3
-    love.graphics.draw(tipBacker, 10, love.graphics.getHeight() - (tipBacker:getHeight() * scaledDownProp), 0, scaledDownProp, scaledDownProp )
+    local scaledDownProp = 1 / 3
+    love.graphics.draw(tipBacker, 10, love.graphics.getHeight() - (tipBacker:getHeight() * scaledDownProp), 0,
+        scaledDownProp, scaledDownProp)
     for _, coin in ipairs(Coins) do
         coin:draw()
     end
-    love.graphics.draw(tipFronter, 10, love.graphics.getHeight() - (tipBacker:getHeight() * scaledDownProp), 0, scaledDownProp, scaledDownProp)
+    love.graphics.draw(tipFronter, 10, love.graphics.getHeight() - (tipBacker:getHeight() * scaledDownProp), 0,
+        scaledDownProp, scaledDownProp)
 
-    scaledDownProp = 1/2.15
-    love.graphics.draw(currentRollImg, love.graphics.getWidth() - currentRollImg:getWidth() * scaledDownProp, love.graphics.getHeight() - currentRollImg:getHeight() * scaledDownProp, 0, scaledDownProp, scaledDownProp)
-    
+    scaledDownProp = 1 / 2.15
+    love.graphics.draw(currentRollImg, love.graphics.getWidth() - currentRollImg:getWidth() * scaledDownProp,
+        love.graphics.getHeight() - currentRollImg:getHeight() * scaledDownProp, 0, scaledDownProp, scaledDownProp)
+
     love.graphics.setFont(font)
-    love.graphics.print(inputCoins, love.graphics.getWidth() - 210 - font:getWidth(tostring(inputCoins))/2, 65)
+    love.graphics.print(inputCoins, love.graphics.getWidth() - 210 - font:getWidth(tostring(inputCoins)) / 2, 65)
+
+    love.graphics.rectangle("line", roller.x, roller.y, roller.width, roller.height)
     popups:draw()
+end
+
+function inRollPos(mx, my)
+    if mx > roller.x and mx < roller.x + roller.width and my > roller.y and my < roller.y + roller.width then
+        return true
+    end
+    return false
 end
