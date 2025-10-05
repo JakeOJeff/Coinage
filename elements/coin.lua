@@ -13,7 +13,7 @@ function coin:new(world, x, y)
     self.img = love.graphics.newImage("assets/coin.png")
 
     self.body = love.physics.newBody(world, self.x, self.y, "dynamic")
-    self.shape = love.physics.newCircleShape(self.img:getWidth() / 10)
+    self.shape = love.physics.newCircleShape(self.img:getWidth() / 15)
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
 
 
@@ -49,6 +49,8 @@ function coin:mousepressed(x, y, button)
         self.mouseJoint = love.physics.newMouseJoint(self.body, x, y)
     end
 end
+
+
 
 function coin:mousereleased()
     if self.dragging then

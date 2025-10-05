@@ -3,13 +3,13 @@ object.__index = object
 
 function object:newRect(world, x, y, width, height, type, angle, visible)
     local self = setmetatable({}, object)
-    self.x = x + width/2
-    self.y = y + height/2
+    self.x = x + width / 2
+    self.y = y + height / 2
     self.width = width
     self.height = height
     self.type = type
     self.angle = angle or 0
-    self.visible = visible or true
+    self.visible = visible 
     self.body = love.physics.newBody(world, self.x, self.y, self.type)
     self.shape = love.physics.newRectangleShape(self.width, self.height)
     self.fixture = love.physics.newFixture(self.body, self.shape)
@@ -21,9 +21,11 @@ end
 
 function object:draw()
     love.graphics.push()
+    if self.visible then
     love.graphics.translate(self.body:getX(), self.body:getY())
     love.graphics.rotate(self.body:getAngle())
     love.graphics.rectangle("line", -self.width / 2, -self.height / 2, self.width, self.height)
+    end
     love.graphics.pop()
 end
 
@@ -39,9 +41,15 @@ function objectsLoad()
     -- table.insert(Objects, OBJECT:newRect(world, midCenter - midWidth / 2 - 130, 0.8 * 600, 10, 10, "static", 0.5))
     -- table.insert(Objects, OBJECT:newRect(world, midCenter - 125, 600, midWidth, 10, "static", 0.3))
 
-    table.insert(Objects, OBJECT:newRect(world, 10, 40 + love.graphics.getHeight() - (tipBacker:getHeight() * 1/2.5), 2, tipBacker:getHeight() * 1/2.5, "static", 0, false))
-        table.insert(Objects, OBJECT:newRect(world, 10 + (tipBacker:getWidth() * 1/2.5), 40 + love.graphics.getHeight() - (tipBacker:getHeight() * 1/2.5), 2, tipBacker:getHeight() * 1/2.5, "static", 0, false))
+    table.insert(Objects,
+        OBJECT:newRect(world, 10, 30 + love.graphics.getHeight() - (tipBacker:getHeight() * 1 / 3), 2,
+            tipBacker:getHeight() * 1 / 3, "static", 0, true))
+    table.insert(Objects,
+        OBJECT:newRect(world, 10 + (tipBacker:getWidth() * 1 / 3),
+            30 + love.graphics.getHeight() - (tipBacker:getHeight() * 1 / 3), 2, tipBacker:getHeight() * 1 / 3,
+            "static", 0, true))
 
+    table.insert(Objects, OBJECT:newRect(world, ))
 end
 
 return object
