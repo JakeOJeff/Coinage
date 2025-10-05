@@ -35,7 +35,6 @@ function coin:update(dt)
         self.mouseJoint:setTarget(mx, my)
     end
 
-    print(self.dragging)
 end
 
 function coin:draw()

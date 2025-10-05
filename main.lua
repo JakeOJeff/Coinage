@@ -10,6 +10,8 @@ Objects = {}
 world = love.physics.newWorld(0, 9.81 * 64, false)
 
 ScreenWalls = require "elements.walls"
+clickCursor = love.mouse.getSystemCursor( "hand" )
+normalCursor = love.mouse.getSystemCursor( "arrow" )
 
 
 
@@ -22,7 +24,7 @@ function love.load()
     tipFronter = love.graphics.newImage("assets/tip-fronter.png")
 
     preRoll = love.graphics.newImage("assets/pre-roll.png")
-    roll = love.graphics.newImage("assets/roll.png")
+    Roll = love.graphics.newImage("assets/roll.png")
     currentRollImg = preRoll
 
     roller = {
@@ -51,17 +53,32 @@ function love.update(dt)
             table.remove(Coins, i) -- remove from table
         end
     end
+
+    local mx, my = love.mouse.getPosition()
+    if inRollPos(mx, my) then
+        love.mouse.setCursor(clickCursor)
+    else
+        love.mouse.setCursor(normalCursor)
+    end
 end
 
 function love.mousepressed(x, y, button)
     for _, coin in ipairs(Coins) do
         coin:mousepressed(x, y, button)
     end
+    if inRollPos(x, y) and inputCoins > 0 then
+        inputCoins = inputCoins - 1
+        currentRollImg = Roll
+        print(currentRollImg)
+    end
 end
 
 function love.mousereleased()
     for _, coin in ipairs(Coins) do
         coin:mousereleased()
+    end
+    if currentRollImg == Roll then
+        currentRollImg = preRoll
     end
 end
 
