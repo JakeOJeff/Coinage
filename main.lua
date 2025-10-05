@@ -7,7 +7,8 @@ world = love.physics.newWorld(0, 9.81 * 64, false)
 
 ScreenWalls = require "elements.walls"
 
-
+font = love.graphics.newFont(45)
+inputCoins = 20
 
 
 function love.load()
@@ -69,5 +70,8 @@ function love.draw()
 
     scaledDownProp = 1/2.15
     love.graphics.draw(currentRollImg, love.graphics.getWidth() - currentRollImg:getWidth() * scaledDownProp, love.graphics.getHeight() - currentRollImg:getHeight() * scaledDownProp, 0, scaledDownProp, scaledDownProp)
+    
+    love.graphics.setFont(font)
+    love.graphics.print(inputCoins, love.graphics.getWidth() - 210 - font:getWidth(tostring(inputCoins))/2, 65)
     popups:draw()
 end
