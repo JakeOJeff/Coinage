@@ -1,7 +1,7 @@
 local object = {}
 object.__index = object
 
-function object:newRect(world, x, y, width, height, type, angle, visible)
+function object:newRect(world, x, y, width, height, type, angle, visible, id)
     local self = setmetatable({}, object)
     self.x = x + width / 2
     self.y = y + height / 2
@@ -10,9 +10,13 @@ function object:newRect(world, x, y, width, height, type, angle, visible)
     self.type = type
     self.angle = angle or 0
     self.visible = visible 
+    self.id = id or "block"
+
     self.body = love.physics.newBody(world, self.x, self.y, self.type)
     self.shape = love.physics.newRectangleShape(self.width, self.height)
     self.fixture = love.physics.newFixture(self.body, self.shape)
+
+    self.fixture:setUserData(self)
 
     self.body:setAngle(self.angle)
 
@@ -27,6 +31,24 @@ function object:draw()
     love.graphics.rectangle("line", -self.width / 2, -self.height / 2, self.width, self.height)
     end
     love.graphics.pop()
+end
+
+function beginContact(fixtureA, fixtureB, contact)
+    local objA = fixtureA:getUserData()
+    local objB = fixtureB:getUserData()
+
+    if objA and objB then
+        if (objA.id == "coin" and objB.id == "slot") or (objB.id == "coin" and objA.id == "slot") then
+            inputCoins = inputCoins + 1
+
+            -- Mark coin for removal
+            if objA.id == "coin" then
+                objA.toRemove = true
+            elseif objB.id == "coin" then
+                objB.toRemove = true
+            end
+        end
+    end
 end
 
 function objectsLoad()
@@ -53,6 +75,9 @@ function objectsLoad()
     table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 175, love.graphics.getHeight() - 145, 100, 5, "static", 0, true ))
         table.insert(Objects, OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 175, love.graphics.getHeight() - 70, 100, 5, "static", 0, true ))
 
+
+        -- slot
+        table.insert(Objects, OBJECT:newRect(world, 30, 30, 40, 50, "static", 0, true, "slot"))
 end
 
 return object

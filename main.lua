@@ -1,5 +1,9 @@
 local popups = require "elements.popups"
 COIN = require "elements.coin"
+
+font = love.graphics.newFont(45)
+inputCoins = 20
+
 OBJECT = require "elements.object"
 Coins = {}
 Objects = {}
@@ -7,8 +11,7 @@ world = love.physics.newWorld(0, 9.81 * 64, false)
 
 ScreenWalls = require "elements.walls"
 
-font = love.graphics.newFont(45)
-inputCoins = 20
+
 
 
 function love.load()
@@ -26,12 +29,20 @@ function love.load()
     table.insert(Coins, COIN:new(world, 200, 200))
 
 end
+world:setCallbacks(beginContact)
 
 function love.update(dt)
     world:update(dt)
     popups:update(dt)
     for _, coin in ipairs(Coins) do
         coin:update(dt)
+    end
+        for i = #Coins, 1, -1 do
+        local c = Coins[i]
+        if c.toRemove then
+            c.body:destroy()  -- destroy the physics body
+            table.remove(Coins, i)  -- remove from table
+        end
     end
 end
 
