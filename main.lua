@@ -1,5 +1,6 @@
 local popups = require "elements.popups"
 COIN = require "elements.coin"
+OBJECT = require "elements.object"
 Coins = {}
     world = love.physics.newWorld(0, 9.81 * 64, false)
 
@@ -34,6 +35,7 @@ function love.mousereleased()
 end
 
 function love.draw()
+    love.graphics.setBackgroundColor(89/255, 209/255, 249/255)
     for _, coin in ipairs(Coins) do
         coin:draw()
     end

@@ -13,11 +13,11 @@ function coin:new(world, x, y)
     self.img = love.graphics.newImage("assets/coin.png")
 
     self.body = love.physics.newBody(world, self.x, self.y, "dynamic")
-    self.shape = love.physics.newCircleShape(self.img:getWidth() / 8)
+    self.shape = love.physics.newCircleShape(self.img:getWidth() / 10)
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
 
 
-    self.fixture:setRestitution(.5)
+    self.fixture:setRestitution(.3)
 
 
     self.dragging = false
