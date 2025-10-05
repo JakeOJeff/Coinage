@@ -1,7 +1,7 @@
 local popups = require "elements.popups"
 COIN = require "elements.coin"
 Coins = {}
-    world = love.physics.newWorld(0, 0, true)
+    world = love.physics.newWorld(0, 9.81 * 64, false)
 
 ScreenWalls = require "elements.walls"
 

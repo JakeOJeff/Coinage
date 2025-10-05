@@ -17,7 +17,7 @@ function coin:new(world, x, y)
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
 
 
-    self.fixture:setRestitution(1)
+    self.fixture:setRestitution(.5)
 
 
     self.dragging = false
