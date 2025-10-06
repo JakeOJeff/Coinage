@@ -2,6 +2,7 @@ local popups = require "elements.popups"
 COIN = require "elements.coin"
 
 font = love.graphics.newFont(45)
+debugFont = love.graphics.newFont(20)
 inputCoins = 0
 
 OBJECT = require "elements.object"
@@ -120,6 +121,7 @@ function love.draw()
     love.graphics.print(inputCoins, love.graphics.getWidth() - 210 - font:getWidth(tostring(inputCoins)) / 2, 65)
 
     love.graphics.rectangle("line", roller.x, roller.y, roller.width, roller.height)
+    love.graphics.setFont(debugFont)
     if #popups.itemInventory > 0 then
         local y = 20
         for i = 1, #popups.itemInventory do

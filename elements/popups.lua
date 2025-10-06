@@ -35,7 +35,8 @@ function popups:load()
             quantity = 1,
             img = love.graphics.newImage("assets/gumball.png"),
             func = function ()
-                
+                                self:addItemToInv("Red Gumball")
+
             end,
             color = {1,0,0},
             rarity = 1/25
@@ -45,7 +46,8 @@ function popups:load()
             quantity = 1,
             img = love.graphics.newImage("assets/gumball.png"),
             func = function ()
-                
+                                self:addItemToInv("Green Gumball")
+
             end,
             color = {0,1,0},
             rarity = 1/12
@@ -55,7 +57,8 @@ function popups:load()
             quantity = 1,
             img = love.graphics.newImage("assets/gumball.png"),
             func = function ()
-                
+                                self:addItemToInv("Blue Gumball")
+
             end,
             color = {0,0,1},
             rarity = 1/8
