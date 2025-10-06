@@ -2,26 +2,10 @@ local walls = {}
 local sW, sH = love.graphics.getDimensions()
 
 function walls:load()
-    table.insert(walls, {})
-    walls[#walls].body = love.physics.newBody(world, sW / 2, 0, "static")
-    walls[#walls].shape = love.physics.newRectangleShape(sW, 10)
-    walls[#walls].fixture = love.physics.newFixture(walls[#walls].body, walls[#walls].shape)
-
-    table.insert(walls, {})
-    walls[#walls].body = love.physics.newBody(world, sW / 2, sH, "static")
-    walls[#walls].shape = love.physics.newRectangleShape(sW, 10)
-    walls[#walls].fixture = love.physics.newFixture(walls[#walls].body, walls[#walls].shape)
-
-    table.insert(walls, {})
-    walls[#walls].body = love.physics.newBody(world, 0, sH / 2, "static")
-    walls[#walls].shape = love.physics.newRectangleShape(10, sH)
-    walls[#walls].fixture = love.physics.newFixture(walls[#walls].body, walls[#walls].shape)
-
-    table.insert(walls, {})
-    walls[#walls].body = love.physics.newBody(world, sW, sH / 2, "static")
-    walls[#walls].shape = love.physics.newRectangleShape(10, sH)
-    walls[#walls].fixture = love.physics.newFixture(walls[#walls].body, walls[#walls].shape)
+    table.insert(walls, OBJECT:newRect(world, 0, 0, sW, 1, "static", 0, false, "block"))
+    table.insert(walls, OBJECT:newRect(world, 0, sH, sW, 1, "static", 0, false, "block"))
+    table.insert(walls, OBJECT:newRect(world, sW, 0, 1, sH, "static", 0, false, "block"))
+    table.insert(walls, OBJECT:newRect(world, 0, 0, 1, sH, "static", 0, false, "block"))
 end
-
 
 return walls

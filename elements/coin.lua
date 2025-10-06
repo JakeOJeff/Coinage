@@ -21,7 +21,7 @@ function coin:new(world, x, y)
 
     self.fixture:setUserData(self)
 
-    self.fixture:setRestitution(.3)
+    self.fixture:setRestitution(0.3)
 
 
     self.dragging = false

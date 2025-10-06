@@ -48,9 +48,15 @@ function beginContact(fixtureA, fixtureB, contact)
             elseif objB.id == "coin" then
                 objB.toRemove = true
             end
-        -- elseif (objA.id == "coin" and objB.id == "coin") then
-        --     cling:stop()
-        --     cling:play()
+        elseif (objA.id == "coin" and objB.id == "block") or (objB.id == "coin" and objA.id == "block") then
+            local coin = (objA.id == "coin") and objA or objB
+            local vx, vy = coin.body:getLinearVelocity()
+            local speed = math.sqrt(vx^2 + vy^2)
+
+            if speed > 400 then
+                -- cling:stop()
+                cling:play()
+            end
         end
     end
 end
@@ -97,6 +103,10 @@ function objectsLoad()
     table.insert(Objects,
         OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 235, 0, 10, 375,
             "static", 0, false))
+
+    table.insert(Objects,
+        OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize - 200, 10, 10, 800,
+            "static", -0.95, true))    
 end
 
 return object
