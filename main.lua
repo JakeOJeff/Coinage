@@ -14,6 +14,10 @@ ScreenWalls = require "elements.walls"
 clickCursor = love.mouse.getSystemCursor("hand")
 normalCursor = love.mouse.getSystemCursor("arrow")
 
+-- Sounds
+coinInserted = love.audio.newSource("assets/inserted.mp3", "static")
+rollingSFX = love.audio.newSource("assets/rolling.mp3", "static")
+
 
 
 
@@ -74,6 +78,8 @@ function love.mousepressed(x, y, button)
         coin:mousepressed(x, y, button)
     end
     if inRollPos(x, y) and inputCoins > 0 and not popups.enabled then
+        rollingSFX:stop()
+        rollingSFX:play()
         inputCoins = inputCoins - 1
         popups.enabled = true
         -- popups:addItems()

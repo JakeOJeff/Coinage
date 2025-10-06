@@ -40,7 +40,8 @@ function beginContact(fixtureA, fixtureB, contact)
     if objA and objB then
         if (objA.id == "coin" and objB.id == "slot") or (objB.id == "coin" and objA.id == "slot") then
             inputCoins = inputCoins + 1
-
+            coinInserted:stop()
+            coinInserted:play()
             -- Mark coin for removal
             if objA.id == "coin" then
                 objA.toRemove = true
