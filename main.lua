@@ -10,8 +10,8 @@ Objects = {}
 world = love.physics.newWorld(0, 9.81 * 64, false)
 
 ScreenWalls = require "elements.walls"
-clickCursor = love.mouse.getSystemCursor( "hand" )
-normalCursor = love.mouse.getSystemCursor( "arrow" )
+clickCursor = love.mouse.getSystemCursor("hand")
+normalCursor = love.mouse.getSystemCursor("arrow")
 
 
 
@@ -35,6 +35,9 @@ function love.load()
     }
 
     objectsLoad()
+
+    stats = {}
+
     table.insert(Coins, COIN:new(world, 200, 200))
 end
 
@@ -60,13 +63,16 @@ function love.update(dt)
     else
         love.mouse.setCursor(normalCursor)
     end
+    
+
+
 end
 
 function love.mousepressed(x, y, button)
     for _, coin in ipairs(Coins) do
         coin:mousepressed(x, y, button)
     end
-    if inRollPos(x, y) and inputCoins > 0 and  not popups.enabled then
+    if inRollPos(x, y) and inputCoins > 0 and not popups.enabled then
         inputCoins = inputCoins - 1
         popups.enabled = true
         -- popups:addItems()
@@ -114,6 +120,16 @@ function love.draw()
     love.graphics.print(inputCoins, love.graphics.getWidth() - 210 - font:getWidth(tostring(inputCoins)) / 2, 65)
 
     love.graphics.rectangle("line", roller.x, roller.y, roller.width, roller.height)
+    if #popups.itemInventory > 0 then
+        local y = 20
+        for i = 1, #popups.itemInventory do
+            if popups.itemInventory[i].name and popups.itemInventory[i].quantity then
+            local text = popups.itemInventory[i].name .. ": " .. tostring(popups.itemInventory[i].quantity)
+            love.graphics.print(text, 20, y)
+            y = y + 20
+            end
+        end
+    end
     popups:draw()
 end
 

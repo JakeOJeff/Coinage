@@ -9,6 +9,8 @@ function popups:load()
     wH = love.graphics.getHeight()
     self.enabled = false
     self.timer = 0
+    self.itemInventory = {}
+
     self.itemList = {
         {
             name = "Coins",
@@ -24,7 +26,7 @@ function popups:load()
             quantity = 1,
             img = love.graphics.newImage("assets/orpheus.png"),
             func = function()
-                
+                self:addItemToInv("Orpheus")
             end,
             rarity = 1 / 4
         },
@@ -59,7 +61,6 @@ function popups:load()
             rarity = 1/8
         },
     }
-    self.itemInventory = {}
     self.slabs = {}
     --[[
     {
@@ -70,6 +71,22 @@ function popups:load()
             table.insert(Coins, COIN:new(200, 200))
         end
     } ]]
+end
+
+function popups:addItemToInv(n)
+    local exists = false
+
+    for _, item in ipairs(self.itemInventory) do
+        if item.name == n then
+            item.quantity = item.quantity + 1
+            exists = true
+            break
+        end
+    end
+
+    if not exists then
+        table.insert(self.itemInventory, { name = n, quantity = 1 })
+    end
 end
 
 function popups:update(dt)
@@ -122,7 +139,8 @@ function popups:addItems()
             quantity = addQty,
             img = chosenItem.img,
             func = chosenItem.func,
-            rarity = chosenItem.rarity
+            rarity = chosenItem.rarity,
+            color = chosenItem.color
         }
         table.insert(self.slabs, newItem)
     end
@@ -134,7 +152,7 @@ function pickRandomItem(itemList)
         totalWeight = totalWeight + item.rarity
     end
 
-    local random = math.random() * totalWeight
+    local random = love.math.random() * totalWeight
     local current = 0
 
     for _, item in ipairs(itemList) do
@@ -168,6 +186,9 @@ function popups:draw()
 
             local y = 220
 
+            if self.slabs[i].color then
+                love.graphics.setColor(self.slabs[i].color)
+            end
             love.graphics.draw(
                 img,
                 x + w / 2,
@@ -176,6 +197,7 @@ function popups:draw()
                 scale, scale,
                 imgW / 2, imgH / 2
             )
+            love.graphics.setColor(1,1,1,0.7)
             love.graphics.setFont(itemFont)
             love.graphics.print(self.slabs[i].name .. " x" .. self.slabs[i].quantity,
                 x + w / 2 - itemFont:getWidth(self.slabs[i].name .. " x" .. self.slabs[i].quantity) / 2, y + w / 2 + 100)
