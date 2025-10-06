@@ -17,6 +17,8 @@ function coin:new(world, x, y)
     self.shape = love.physics.newCircleShape(self.img:getWidth() / 15)
     self.fixture = love.physics.newFixture(self.body, self.shape, 1)
 
+    self.hover = {1,1,1,0.9}
+
     self.fixture:setUserData(self)
 
     self.fixture:setRestitution(.3)
@@ -38,8 +40,12 @@ function coin:update(dt)
 end
 
 function coin:draw()
+    if self.dragging and self.mouseJoint then
+        love.graphics.setColor(self.hover)
+    end
     love.graphics.draw(self.img, self.x, self.y, self.body:getAngle(), self.shape:getRadius() * 2 / self.img:getWidth(),
         self.shape:getRadius() * 2 / self.img:getHeight(), self.img:getWidth() / 2, self.img:getHeight() / 2)
+        love.graphics.setColor(1,1,1)
 end
 
 function coin:mousepressed(x, y, button)
