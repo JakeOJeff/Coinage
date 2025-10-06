@@ -105,8 +105,8 @@ function objectsLoad()
             "static", 0, false))
 
     table.insert(Objects,
-        OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize - 195, 10, 10, 800,
-            "static", -0.95, true))    
+        OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize - 80, 290, 10, 500,
+            "static", -1.1, true))    
 end
 
 return object
