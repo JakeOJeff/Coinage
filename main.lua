@@ -9,6 +9,7 @@ OBJECT = require "elements.object"
 Coins = {}
 Objects = {}
 TopObjects = {}
+BottomObjects = {}
 world = love.physics.newWorld(0, 9.81 * 64, false)
 
 ScreenWalls = require "elements.walls"
@@ -21,6 +22,8 @@ rollingSFX = love.audio.newSource("assets/rolling.mp3", "static")
 cling = love.audio.newSource("assets/cling.mp3", "static")
 
 loadedTop = false
+loadedBottom = false
+
 
 
 function love.load()
@@ -70,9 +73,6 @@ function love.update(dt)
     else
         love.mouse.setCursor(normalCursor)
     end
-    
-
-
 end
 
 function love.mousepressed(x, y, button)
@@ -108,6 +108,10 @@ function love.keypressed(key)
     if key == "r" then
         loadTopSetRail()
     end
+
+    if key == "f" then
+        loadBottomSetRail()
+    end
 end
 
 function love.draw()
@@ -116,6 +120,9 @@ function love.draw()
         v:draw()
     end
     for _, v in pairs(TopObjects) do
+        v:draw()
+    end
+    for _, v in pairs(BottomObjects) do
         v:draw()
     end
     local scaledDownProp = 1 / 3
@@ -140,9 +147,9 @@ function love.draw()
         local y = 20
         for i = 1, #popups.itemInventory do
             if popups.itemInventory[i].name and popups.itemInventory[i].quantity then
-            local text = popups.itemInventory[i].name .. ": " .. tostring(popups.itemInventory[i].quantity)
-            love.graphics.print(text, 20, y)
-            y = y + 20
+                local text = popups.itemInventory[i].name .. ": " .. tostring(popups.itemInventory[i].quantity)
+                love.graphics.print(text, 20, y)
+                y = y + 20
             end
         end
     end

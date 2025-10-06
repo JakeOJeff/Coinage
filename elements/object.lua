@@ -62,13 +62,6 @@ function beginContact(fixtureA, fixtureB, contact)
 end
 
 function objectsLoad()
-
-
-
-
-
-
-
     table.insert(Objects,
         OBJECT:newRect(world, 10, 30 + love.graphics.getHeight() - (tipBacker:getHeight() * 1 / 3), 2,
             tipBacker:getHeight() * 1 / 3, "static", 0, false))
@@ -97,10 +90,6 @@ function objectsLoad()
     table.insert(Objects,
         OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize + 235, 0, 10, 375,
             "static", 0, false))
-
-    table.insert(Objects,
-        OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize - 80, 290, 10, 500,
-            "static", -1.1, true))
 end
 
 function loadTopSetRail()
@@ -116,6 +105,24 @@ function loadTopSetRail()
             v.body:destroy()
         end
         TopObjects = {}
+    end
+end
+
+function loadBottomSetRail()
+        local smallPropSize = 1 / 2.15
+
+    if loadedBottom == false then
+        loadedBottom = true
+        -- Bottom Rail
+        table.insert(BottomObjects,
+            OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize - 80, 290, 10, 500,
+                "static", -1.1, true))
+    else
+        loadedBottom = false
+        for _, v in ipairs(BottomObjects) do
+            v.body:destroy()
+        end
+        BottomObjects = {}
     end
 end
 
