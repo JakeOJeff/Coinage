@@ -48,6 +48,9 @@ function beginContact(fixtureA, fixtureB, contact)
             elseif objB.id == "coin" then
                 objB.toRemove = true
             end
+        -- elseif (objA.id == "coin" and objB.id == "coin") then
+        --     cling:stop()
+        --     cling:play()
         end
     end
 end

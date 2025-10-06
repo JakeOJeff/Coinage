@@ -17,7 +17,7 @@ normalCursor = love.mouse.getSystemCursor("arrow")
 -- Sounds
 coinInserted = love.audio.newSource("assets/inserted.mp3", "static")
 rollingSFX = love.audio.newSource("assets/rolling.mp3", "static")
-
+cling = love.audio.newSource("assets/cling.mp3", "static")
 
 
 
@@ -126,7 +126,7 @@ function love.draw()
     love.graphics.setFont(font)
     love.graphics.print(inputCoins, love.graphics.getWidth() - 210 - font:getWidth(tostring(inputCoins)) / 2, 65)
 
-    love.graphics.rectangle("line", roller.x, roller.y, roller.width, roller.height)
+    -- love.graphics.rectangle("line", roller.x, roller.y, roller.width, roller.height)
     love.graphics.setFont(debugFont)
     if #popups.itemInventory > 0 then
         local y = 20
