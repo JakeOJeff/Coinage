@@ -6,6 +6,7 @@ debugFont = love.graphics.newFont(20)
 inputCoins = 0
 
 OBJECT = require "elements.object"
+tutorial = require "elements.tutorial"
 Coins = {}
 Objects = {}
 TopObjects = {}
@@ -47,7 +48,7 @@ function love.load()
     objectsLoad()
 
     stats = {}
-
+    tutorial:load()
     table.insert(Coins, COIN:new(world, 200, 200))
 end
 
@@ -55,6 +56,7 @@ world:setCallbacks(beginContact)
 
 function love.update(dt)
     world:update(dt)
+    tutorial:update()
     popups:update(dt)
     for _, coin in ipairs(Coins) do
         coin:update(dt)
@@ -154,6 +156,7 @@ function love.draw()
         end
     end
     popups:draw()
+    tutorial:draw()
 end
 
 function inRollPos(mx, my)
