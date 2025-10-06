@@ -8,6 +8,7 @@ inputCoins = 0
 OBJECT = require "elements.object"
 Coins = {}
 Objects = {}
+TopObjects = {}
 world = love.physics.newWorld(0, 9.81 * 64, false)
 
 ScreenWalls = require "elements.walls"
@@ -19,6 +20,7 @@ coinInserted = love.audio.newSource("assets/inserted.mp3", "static")
 rollingSFX = love.audio.newSource("assets/rolling.mp3", "static")
 cling = love.audio.newSource("assets/cling.mp3", "static")
 
+loadedTop = false
 
 
 function love.load()
@@ -102,6 +104,10 @@ function love.keypressed(key)
         local randLoveNum = love.math.random(20, 400)
         table.insert(Coins, COIN:new(world, randLoveNum, 200))
     end
+
+    if key == "r" then
+        loadTopSetRail()
+    end
 end
 
 function love.draw()
@@ -109,7 +115,9 @@ function love.draw()
     for _, v in pairs(Objects) do
         v:draw()
     end
-
+    for _, v in pairs(TopObjects) do
+        v:draw()
+    end
     local scaledDownProp = 1 / 3
     love.graphics.draw(tipBacker, 10, love.graphics.getHeight() - (tipBacker:getHeight() * scaledDownProp), 0,
         scaledDownProp, scaledDownProp)

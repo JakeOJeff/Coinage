@@ -51,7 +51,7 @@ function beginContact(fixtureA, fixtureB, contact)
         elseif (objA.id == "coin" and objB.id == "block") or (objB.id == "coin" and objA.id == "block") then
             local coin = (objA.id == "coin") and objA or objB
             local vx, vy = coin.body:getLinearVelocity()
-            local speed = math.sqrt(vx^2 + vy^2)
+            local speed = math.sqrt(vx ^ 2 + vy ^ 2)
 
             if speed > 400 then
                 -- cling:stop()
@@ -62,16 +62,10 @@ function beginContact(fixtureA, fixtureB, contact)
 end
 
 function objectsLoad()
-    local midCenter = love.graphics.getWidth() / 2
-    local midWidth = love.graphics.getWidth() / 5
 
-    -- table.insert(Objects, OBJECT:newRect(world, midCenter - 125, 200, midWidth, 10, "static", 0.3, true))
 
-    -- table.insert(Objects, OBJECT:newRect(world, midCenter + midWidth / 2 + 130, 0.8 * 400, 10, 10, "static", -0.5, true))
-    -- table.insert(Objects, OBJECT:newRect(world, midCenter + 125, 400, midWidth, 10, "static", -0.3, true))
 
-    -- table.insert(Objects, OBJECT:newRect(world, midCenter - midWidth / 2 - 130, 0.8 * 600, 10, 10, "static", 0.5, true))
-    -- table.insert(Objects, OBJECT:newRect(world, midCenter - 125, 600, midWidth, 10, "static", 0.3, true))
+
 
 
 
@@ -106,7 +100,23 @@ function objectsLoad()
 
     table.insert(Objects,
         OBJECT:newRect(world, love.graphics.getWidth() - currentRollImg:getWidth() * smallPropSize - 80, 290, 10, 500,
-            "static", -1.1, true))    
+            "static", -1.1, true))
+end
+
+function loadTopSetRail()
+    local midCenter = love.graphics.getWidth() / 2
+    local midWidth = love.graphics.getWidth() / 5
+    if loadedTop == false then
+        loadedTop = true
+        table.insert(TopObjects, OBJECT:newRect(world, midCenter - 125, 200, midWidth, 10, "static", 0.3, true))
+        table.insert(TopObjects, OBJECT:newRect(world, midCenter + 125, 400, midWidth, 10, "static", -0.3, true))
+    else
+        loadedTop = false
+        for _, v in ipairs(TopObjects) do
+            v.body:destroy()
+        end
+        TopObjects = {}
+    end
 end
 
 return object
