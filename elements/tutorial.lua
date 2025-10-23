@@ -16,7 +16,6 @@ function tutorial:load()
             completed = false
         }
     }
-
 end
 
 function tutorial:update()
@@ -26,14 +25,12 @@ function tutorial:update()
 end
 
 function tutorial:draw()
-    for _, v in ipairs(self.list) do
-        if not v.completed then
-            love.graphics.print(v.info, v.x, v.y)  
-                    break
-
-        end
-    end
-        
+    -- for _, v in ipairs(self.list) do
+    --     if not v.completed then
+    --         love.graphics.print(v.info, v.x, v.y)
+    --         break
+    --     end
+    -- end
 end
 
 return tutorial
